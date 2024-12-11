@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import brand from "../../assets/images/brand.png";
-import * as alertActions from '../../redux/alert/alert.actions';
-import * as userActions from '../../redux/user/user.actions';
+import * as alertActions from "../../redux/alert/alert.actions";
+import * as userActions from "../../redux/user/user.actions";
 
 const Login = () => {
   let dispatch = useDispatch();
@@ -17,6 +17,7 @@ const Login = () => {
     emailError: "",
     passwordError: "",
   });
+  console.log("test", abc);
   let validateEmail = (event) => {
     setUser({ ...user, email: event.target.value });
     let regExp = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
@@ -34,11 +35,10 @@ const Login = () => {
   let submitLogin = (event) => {
     event.preventDefault();
     //console.log(user);
-    if(user.email !== '' && user.password !== ''){
+    if (user.email !== "" && user.password !== "") {
       dispatch(userActions.loginUser(user, history));
-    }
-    else{
-      dispatch(alertActions.setAlert('Please fill in the fields', 'danger'));
+    } else {
+      dispatch(alertActions.setAlert("Please fill in the fields", "danger"));
     }
   };
   return (

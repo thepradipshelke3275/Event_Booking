@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import brand from "../../assets/images/brand.png";
-import * as alertActions from '../../redux/alert/alert.actions';
-import * as userActions from '../../redux/user/user.actions';
+import * as alertActions from "../../redux/alert/alert.actions";
+import * as userActions from "../../redux/user/user.actions";
 
 const Register = () => {
   let dispatch = useDispatch();
   let history = useHistory();
-
+  console.log("test");
   let [user, setUser] = useState({
     name: "",
     email: "",
@@ -28,27 +28,26 @@ const Register = () => {
   };
   let validateEmail = (event) => {
     setUser({ ...user, email: event.target.value });
-    let regExp =  /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+    let regExp = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
     !regExp.test(event.target.value)
       ? setUserError({ ...userError, emailError: "Enter a Proper Email" })
       : setUserError({ ...userError, emailError: "" });
   };
   let validatePassword = (event) => {
     setUser({ ...user, password: event.target.value });
-    let regExp =  /^[a-z]\w{7,14}$/;
+    let regExp = /^[a-z]\w{7,14}$/;
     !regExp.test(event.target.value)
       ? setUserError({ ...userError, passwordError: "Enter a Proper Password" })
       : setUserError({ ...userError, passwordError: "" });
   };
   let submitRegister = (event) => {
     event.preventDefault();
-    if(user.name !== '' && user.email !== '' && user.password !== ''){
+    if (user.name !== "" && user.email !== "" && user.password !== "") {
       console.log(user);
       // dispatch an action with user , history
-      dispatch(userActions.registerUser(user , history));
-    }
-    else{
-      dispatch(alertActions.setAlert('Please fill in the fields', 'danger'))
+      dispatch(userActions.registerUser(user, history));
+    } else {
+      dispatch(alertActions.setAlert("Please fill in the fields", "danger"));
     }
   };
 
